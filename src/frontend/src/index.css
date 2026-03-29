@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Tribute palette */
+    --navy: 0.19 0.05 240;
+    --navy-text: 0.22 0.04 240;
+    --body-text: 0.33 0.01 240;
+    --page-bg: 0.95 0.01 85;
+    --beige: 0.88 0.03 75;
+    --taupe: 0.56 0.02 75;
+    --charcoal: 0.28 0.0 0;
+    --light-gray: 0.87 0.0 0;
+
+    /* shadcn tokens mapped to our palette */
+    --background: 0.95 0.01 85;
+    --foreground: 0.22 0.04 240;
+    --card: 0.88 0.03 75;
+    --card-foreground: 0.22 0.04 240;
+    --popover: 0.95 0.01 85;
+    --popover-foreground: 0.22 0.04 240;
+    --primary: 0.19 0.05 240;
+    --primary-foreground: 0.95 0.01 85;
+    --secondary: 0.88 0.03 75;
+    --secondary-foreground: 0.22 0.04 240;
+    --muted: 0.88 0.03 75;
+    --muted-foreground: 0.56 0.02 75;
+    --accent: 0.88 0.03 75;
+    --accent-foreground: 0.22 0.04 240;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.8 0.02 75;
+    --input: 0.8 0.02 75;
+    --ring: 0.56 0.02 75;
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+    --sidebar: 0.88 0.03 75;
+    --sidebar-foreground: 0.22 0.04 240;
+    --sidebar-primary: 0.19 0.05 240;
+    --sidebar-primary-foreground: 0.95 0.01 85;
+    --sidebar-accent: 0.88 0.03 75;
+    --sidebar-accent-foreground: 0.22 0.04 240;
+    --sidebar-border: 0.8 0.02 75;
+    --sidebar-ring: 0.56 0.02 75;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+/* Grain texture overlay */
+.grain-bg {
+  position: relative;
+}
+.grain-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Portrait double-ring */
+.portrait-ring {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  padding: 6px;
+  background: oklch(0.87 0.0 0);
+  box-shadow: 0 0 0 3px oklch(0.95 0.01 85), 0 0 0 8px oklch(0.19 0.05 240);
+}
+
+.portrait-ring img {
+  border-radius: 50%;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(100%) contrast(1.05);
+}
+
+/* Atom SVG animation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.atom-orbit {
+  animation: spin-slow 18s linear infinite;
+  transform-origin: center;
+}
+.atom-orbit-2 {
+  animation: spin-slow 12s linear infinite reverse;
+  transform-origin: center;
+}
+
+/* Nav link hover */
+.nav-link {
+  position: relative;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: oklch(0.87 0.0 0);
+  transition: color 0.2s;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: oklch(0.87 0.0 0);
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+.nav-link:hover {
+  color: #fff;
+}
+
+/* Achievement badge */
+.achievement-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.badge-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: oklch(0.19 0.05 240);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
